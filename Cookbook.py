@@ -18,3 +18,15 @@ with open('c:/Users/bodri/OneDrive/Рабочий стол/Homework_Cookbook/rec
             Cook_book[dish].append(ingredients)
         f.readline()
 pprint(Cook_book)    
+
+def get_shop_list_by_dishes(dishes, person_count):
+    ingredients_list = {}
+    for food in dishes:
+        if food in Cook_book.keys():
+            for ingredient in Cook_book[food]: 
+                if ingredient['ingredient_name'] not in ingredients_list:
+                    ingredients_list[ingredient['ingredient_name']] = { 'measure' : ingredient['measure'], 'quantity' : (person_count * ingredient['quantity']) }
+                else:
+                    ingredients_list[ingredient['ingredient_name']]['quantity'] += person_count * ingredient['quantity']
+    return ingredients_list
+pprint(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
